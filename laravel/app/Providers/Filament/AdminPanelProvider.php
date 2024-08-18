@@ -46,7 +46,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->navigationItems([
                 NavigationItem::make('Github')
-                    ->url('https://github.com/nipkaart/nipkaart-dev', shouldOpenInNewTab: true)
+                    ->url('https://github.com/nipkaart/core', shouldOpenInNewTab: true)
                     ->icon('heroicon-o-link')
                     ->group('Information')
                     ->sort(2),

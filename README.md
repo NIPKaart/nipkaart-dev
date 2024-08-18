@@ -1,4 +1,4 @@
-# 🅿️ NIPKaart - Development
+# 🅿️ NIPKaart - Core
 <!-- PROJECT SHIELDS -->
 ![Project Maintenance][maintenance-shield]
 [![License][license-shield]](LICENSE)
@@ -72,14 +72,14 @@ DB_PASSWORD=password
 name: 'template'
 ```
 
-6. Install the composer dependencies and generate a new application key:
-```bash
-composer install && php artisan key:generate
-```
-
-7. Start the development server:
+6. Start the development server:
 ```bash
 ./vendor/bin/sail up -d
+```
+
+7. Install the composer dependencies and generate a new application key:
+```bash
+./vendor/bin/sail composer install && php artisan key:generate
 ```
 
 8. Run the database migrations and seed the database:
@@ -120,15 +120,15 @@ Distributed under the **MIT** License. See [`LICENSE`](LICENSE) for more informa
 [shield]: https://github.com/bezhanSalleh/filament-shield
 
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2024.svg?style=for-the-badge
-[contributors-shield]: https://img.shields.io/github/contributors/nipkaart/nipkaart-dev.svg?style=for-the-badge
-[contributors-url]: https://github.com/nipkaart/nipkaart-dev/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/nipkaart/nipkaart-dev.svg?style=for-the-badge
-[forks-url]: https://github.com/nipkaart/nipkaart-dev/network/members
-[stars-shield]: https://img.shields.io/github/stars/nipkaart/nipkaart-dev.svg?style=for-the-badge
-[stars-url]: https://github.com/nipkaart/nipkaart-dev/stargazers
-[issues-shield]: https://img.shields.io/github/issues/nipkaart/nipkaart-dev.svg?style=for-the-badge
-[issues-url]: https://github.com/nipkaart/nipkaart-dev/issues
-[license-shield]: https://img.shields.io/github/license/nipkaart/nipkaart-dev.svg?style=for-the-badge
-[commits-shield]: https://img.shields.io/github/commit-activity/y/nipkaart/nipkaart-dev.svg?style=for-the-badge
-[commits]: https://github.com/nipkaart/nipkaart-dev/commits/master
-[last-commit-shield]: https://img.shields.io/github/last-commit/nipkaart/nipkaart-dev.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/nipkaart/core.svg?style=for-the-badge
+[contributors-url]: https://github.com/nipkaart/core/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/nipkaart/core.svg?style=for-the-badge
+[forks-url]: https://github.com/nipkaart/core/network/members
+[stars-shield]: https://img.shields.io/github/stars/nipkaart/core.svg?style=for-the-badge
+[stars-url]: https://github.com/nipkaart/core/stargazers
+[issues-shield]: https://img.shields.io/github/issues/nipkaart/core.svg?style=for-the-badge
+[issues-url]: https://github.com/nipkaart/core/issues
+[license-shield]: https://img.shields.io/github/license/nipkaart/core.svg?style=for-the-badge
+[commits-shield]: https://img.shields.io/github/commit-activity/y/nipkaart/core.svg?style=for-the-badge
+[commits]: https://github.com/nipkaart/core/commits/master
+[last-commit-shield]: https://img.shields.io/github/last-commit/nipkaart/core.svg?style=for-the-badge
