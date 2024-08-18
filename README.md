@@ -15,7 +15,7 @@
 
 This is a laravel template repository project, which can be used as a basis for future projects. Based on the TALL stack and packed with useful features to get started right away.
 
-### Features
+## Features
 
 - PHP 8.3
 - Laravel 11.x
@@ -29,15 +29,7 @@ This is a laravel template repository project, which can be used as a basis for 
     - [Pint](.github/workflows/linting.yaml)
     - [Larastan](.github/workflows/typing.yaml)
 
-### Create admin user
-
-To create an admin user for the Filament dashboard, run the following command:
-
-```bash
-php artisan make:filament-user
-```
-
-### Roles and permissions
+## Roles and permissions
 
 By default there are 3 types of roles:
 
@@ -45,7 +37,11 @@ By default there are 3 types of roles:
 - Moderator
 - User
 
-## Setting up development environment
+## Getting started
+
+Follow the steps below to get started with the Laravel template project.
+
+### Setting up development environment
 
 1. Clone the repository
 2. Open a terminal and navigate to the **laravel** folder
@@ -70,19 +66,46 @@ DB_USERNAME=sail
 DB_PASSWORD=password
 ```
 
-5. Install the composer dependencies and generate a new application key:
+5. Change the name in `docker-compose.yml`:
+```yaml
+---
+name: 'template'
+```
+
+6. Install the composer dependencies and generate a new application key:
 ```bash
 composer install && php artisan key:generate
 ```
 
-6. Start the development server:
+7. Start the development server:
 ```bash
 ./vendor/bin/sail up -d
 ```
 
-7. Run the database migrations and seed the database:
+8. Run the database migrations and seed the database:
 ```bash
 ./vendor/bin/sail php artisan migrate --seed
+```
+
+9. Build the frontend assets:
+```bash
+npm install && npm run dev
+```
+
+### Create admin user
+
+To create an admin user for the Filament dashboard, run the following command:
+
+```bash
+php artisan make:filament-user
+```
+
+### Testing with Pest
+
+To run the tests with Pest, run the following command:
+
+```bash
+./vendor/bin/sail pest --coverage
 ```
 
 ## License
