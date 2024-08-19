@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 use Illuminate\Support\Facades\Auth;
 use Filament\View\PanelsRenderHook;
 use Illuminate\Support\Facades\Blade;
+use App\Filament\App\Pages\EditProfile;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -34,6 +35,7 @@ class AppPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Green,
             ])
+            ->databaseNotifications()
             ->discoverResources(in: app_path('Filament/App/Resources'), for: 'App\\Filament\\App\\Resources')
             ->discoverPages(in: app_path('Filament/App/Pages'), for: 'App\\Filament\\App\\Pages')
             ->pages([
@@ -46,6 +48,9 @@ class AppPanelProvider extends PanelProvider
             // Navigation
             ->topNavigation()
             ->userMenuItems([
+                'profile' => MenuItem::make()
+                    ->url(fn (): string => EditProfile::getUrl())
+                    ->label('Edit Profile'),
                 'switch-admin-dashboard' => MenuItem::make()
                     ->label('Admin Dashboard')
                     ->url(fn (): string => route('filament.admin.pages.dashboard'))

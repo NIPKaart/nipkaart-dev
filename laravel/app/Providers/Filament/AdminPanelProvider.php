@@ -5,12 +5,12 @@ namespace App\Providers\Filament;
 use Filament\View\PanelsRenderHook;
 use Illuminate\Support\Facades\Blade;
 use App\Filament\Admin\Pages\Backups;
-use App\Filament\Admin\Pages\EditProfile;
+use App\Filament\App\Pages\EditProfile;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Navigation\MenuItem;
-use Filament\Navigation\NavigationItem;
+// use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -43,20 +43,22 @@ class AdminPanelProvider extends PanelProvider
             // Navigation
             ->sidebarCollapsibleOnDesktop()
             ->userMenuItems([
-                'profile' => MenuItem::make()->url(fn (): string => EditProfile::getUrl()),
+                'profile' => MenuItem::make()
+                    ->url(fn (): string => EditProfile::getUrl(panel: 'app'))
+                    ->label('Edit Profile'),
                 'switch-app-dashboard' => MenuItem::make()
                     ->label('User Dashboard')
                     ->url(fn (): string => route('filament.app.pages.dashboard'))
                     ->icon('heroicon-o-arrows-right-left'),
                 'logout' => MenuItem::make()->label('Log Out'),
             ])
-            ->navigationItems([
-                NavigationItem::make('Github')
-                    ->url('https://github.com/nipkaart/core', shouldOpenInNewTab: true)
-                    ->icon('heroicon-o-link')
-                    ->group('Information')
-                    ->sort(2),
-            ])
+            // ->navigationItems([
+            //     NavigationItem::make('Github')
+            //         ->url('https://github.com/nipkaart/core', shouldOpenInNewTab: true)
+            //         ->icon('heroicon-o-link')
+            //         ->group('Information')
+            //         ->sort(2),
+            // ])
             ->databaseNotifications()
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')

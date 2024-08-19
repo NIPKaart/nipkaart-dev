@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Admin\Pages;
+namespace App\Filament\App\Pages;
 
 use Exception;
 use Filament\Actions\Action;
@@ -25,13 +25,13 @@ class EditProfile extends Page implements HasForms
 {
     use InteractsWithForms;
 
-    protected static ?string $navigationLabel = 'Profile';
+    protected static ?string $navigationLabel = 'Edit Profile';
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
 
     protected static string $view = 'filament.pages.edit-profile';
 
-    protected static ?string $navigationGroup = 'Information';
+    protected static ?string $navigationGroup = 'Account';
 
     public ?array $profileData = [];
 
@@ -111,7 +111,7 @@ class EditProfile extends Page implements HasForms
         $this->sendSuccessNotification();
 
         // Redirect back to dashboard page
-        $this->redirect(route('filament.admin.pages.dashboard'));
+        $this->redirect(route('filament.app.pages.dashboard'));
     }
 
     public function updatePassword(): void
@@ -135,7 +135,7 @@ class EditProfile extends Page implements HasForms
         $this->sendSuccessNotification();
 
         // Redirect back to dashboard page
-        $this->redirect(route('filament.admin.pages.dashboard'));
+        $this->redirect(route('filament.app.pages.dashboard'));
     }
 
     private function sendSuccessNotification(): void
