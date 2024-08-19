@@ -92,7 +92,7 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])->renderHook(
                 PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
-                fn (): string => Blade::render('<x-filament::badge color="primary">Backend</x-filament::badge>'),
+                fn (): string => Blade::render('<x-filament::badge color="primary">BACKEND</x-filament::badge>'),
             );
     }
 }
