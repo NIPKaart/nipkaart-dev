@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\App\Pages\EditProfile;
+use App\Filament\Auth\CustomRegister;
 use App\Filament\Auth\UserLogin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -37,6 +38,7 @@ class AppPanelProvider extends PanelProvider
             ->brandLogoHeight('2rem')
             ->favicon(asset('images/favicon.ico'))
             ->login(UserLogin::class)
+            ->registration(CustomRegister::class)
             ->passwordReset()
             ->colors([
                 'primary' => Color::Green,
