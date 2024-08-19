@@ -10,8 +10,8 @@ use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Navigation\MenuItem;
 use Filament\Pages;
-use Filament\Panel;
 // use Filament\Navigation\NavigationItem;
+use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\View\PanelsRenderHook;
@@ -36,6 +36,9 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->brandLogo(asset('images/logo-dark.svg'))
+            ->brandLogoHeight('2rem')
+            ->favicon(asset('images/favicon.ico'))
             ->login(AdminLogin::class)
             ->passwordReset()
             ->emailVerification()
