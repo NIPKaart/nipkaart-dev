@@ -1,7 +1,7 @@
 <?php
 
 use App\Enums\UserRole;
-use App\Filament\Pages\EditProfile;
+use App\Filament\App\Pages\EditProfile;
 use App\Models\User;
 
 use function Pest\Livewire\livewire;
@@ -12,7 +12,7 @@ beforeEach(function () {
 });
 
 it('can render edit profile page', function () {
-    $this->get(EditProfile::getUrl())
+    $this->get(EditProfile::getUrl(panel: 'app'))
         ->assertSuccessful();
 });
 
@@ -26,7 +26,7 @@ it('can succesfull update user profile', function () {
         ], 'editProfileForm')
         ->call('updateProfile')
         ->assertHasNoFormErrors([], 'editProfileForm')
-        ->assertRedirect(route('filament.admin.pages.dashboard'));
+        ->assertRedirect(route('filament.app.pages.dashboard'));
 
     $this->assertDatabaseHas(User::class, [
         'name' => $newUser->name,
@@ -45,7 +45,7 @@ it('can succesfull update user password', function () {
         ], 'editPasswordForm')
         ->call('updatePassword')
         ->assertHasNoFormErrors([], 'editPasswordForm')
-        ->assertRedirect(route('filament.admin.pages.dashboard'));
+        ->assertRedirect(route('filament.app.pages.dashboard'));
 
     $this->assertTrue(Hash::check($newPassword, $this->admin->password));
 });

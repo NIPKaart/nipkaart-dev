@@ -2,17 +2,18 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Pages\Backups;
-use App\Filament\Pages\EditProfile;
+use App\Filament\Admin\Pages\Backups;
+use App\Filament\App\Pages\EditProfile;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Navigation\MenuItem;
-use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
+// use Filament\Navigation\NavigationItem;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\View\PanelsRenderHook;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -20,6 +21,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use ShuvroRoy\FilamentSpatieLaravelBackup\FilamentSpatieLaravelBackupPlugin;
 
@@ -34,37 +36,42 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->passwordReset()
             ->emailVerification()
-            ->profile()
             ->colors([
                 'primary' => Color::Amber,
             ])
             // Navigation
             ->sidebarCollapsibleOnDesktop()
             ->userMenuItems([
-                'profile' => MenuItem::make()->url(fn (): string => EditProfile::getUrl()),
+                'profile' => MenuItem::make()
+                    ->url(fn (): string => EditProfile::getUrl(panel: 'app'))
+                    ->label('Edit Profile'),
+                'switch-app-dashboard' => MenuItem::make()
+                    ->label('User Dashboard')
+                    ->url(fn (): string => route('filament.app.pages.dashboard'))
+                    ->icon('heroicon-o-arrows-right-left'),
                 'logout' => MenuItem::make()->label('Log Out'),
             ])
-            ->navigationItems([
-                NavigationItem::make('Github')
-                    ->url('https://github.com/nipkaart/core', shouldOpenInNewTab: true)
-                    ->icon('heroicon-o-link')
-                    ->group('Information')
-                    ->sort(2),
-            ])
+            // ->navigationItems([
+            //     NavigationItem::make('Github')
+            //         ->url('https://github.com/nipkaart/core', shouldOpenInNewTab: true)
+            //         ->icon('heroicon-o-link')
+            //         ->group('Information')
+            //         ->sort(2),
+            // ])
             ->databaseNotifications()
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
+            ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')
             ->pages([
                 Pages\Dashboard::class,
             ])
             // Plugins
-            ->plugin(FilamentSpatieLaravelBackupPlugin::make()
-                ->usingPage(Backups::class)
-                ->usingPolingInterval('10s'))
             ->plugins([
+                FilamentSpatieLaravelBackupPlugin::make()
+                    ->usingPage(Backups::class)
+                    ->usingPolingInterval('10s'),
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Admin/Widgets'), for: 'App\\Filament\\Admin\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
@@ -82,6 +89,9 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])->renderHook(
+                PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
+                fn (): string => Blade::render('<x-filament::badge color="primary">ADMIN</x-filament::badge>'),
+            );
     }
 }
