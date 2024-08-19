@@ -1,7 +1,7 @@
 <?php
 
 use App\Enums\UserRole;
-use App\Filament\Pages\EditProfile;
+use App\Filament\Admin\Pages\EditProfile;
 use App\Models\User;
 
 use function Pest\Livewire\livewire;

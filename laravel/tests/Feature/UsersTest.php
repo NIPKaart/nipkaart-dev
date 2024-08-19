@@ -1,7 +1,7 @@
 <?php
 
 use App\Enums\UserRole;
-use App\Filament\Resources\UserResource;
+use App\Filament\Admin\Resources\UserResource;
 use App\Models\User;
 use Filament\Actions\DeleteAction;
 
