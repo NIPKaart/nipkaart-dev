@@ -34,7 +34,7 @@ class AppPanelProvider extends PanelProvider
         return $panel
             ->id('app')
             ->path('app')
-            ->brandLogo(asset('images/logo-dark.svg'))
+            ->brandLogo(asset('images/logo-light.svg'))
             ->brandLogoHeight('2rem')
             ->favicon(asset('images/favicon.ico'))
             ->login(UserLogin::class)
