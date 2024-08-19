@@ -2,6 +2,8 @@
 
 namespace App\Providers\Filament;
 
+use Filament\View\PanelsRenderHook;
+use Illuminate\Support\Facades\Blade;
 use App\Filament\Admin\Pages\Backups;
 use App\Filament\Admin\Pages\EditProfile;
 use Filament\Http\Middleware\Authenticate;
@@ -42,6 +44,10 @@ class AdminPanelProvider extends PanelProvider
             ->sidebarCollapsibleOnDesktop()
             ->userMenuItems([
                 'profile' => MenuItem::make()->url(fn (): string => EditProfile::getUrl()),
+                'switch-app-dashboard' => MenuItem::make()
+                    ->label('User Dashboard')
+                    ->url(fn (): string => route('filament.app.pages.dashboard'))
+                    ->icon('heroicon-o-arrows-right-left'),
                 'logout' => MenuItem::make()->label('Log Out'),
             ])
             ->navigationItems([
@@ -82,6 +88,9 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])->renderHook(
+                PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
+                fn (): string => Blade::render('<x-filament::badge color="primary">Backend</x-filament::badge>'),
+            );
     }
 }

@@ -63,6 +63,10 @@ class User extends Authenticatable implements FilamentUser
             return $this->hasRole([UserRole::Admin, UserRole::Moderator]);
         }
 
+        if ($panel->getId() === 'app') {
+            return $this->hasRole([UserRole::Admin, UserRole::Moderator, UserRole::User]);
+        }
+
         // @codeCoverageIgnoreStart
         return false;
         // @codeCoverageIgnoreEnd
