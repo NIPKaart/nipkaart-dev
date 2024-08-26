@@ -35,6 +35,7 @@ class AppPanelProvider extends PanelProvider
             ->id('app')
             ->path('app')
             ->brandLogo(asset('images/logo-light.svg'))
+            ->darkModeBrandLogo(asset('images/logo-dark.svg'))
             ->brandLogoHeight('2rem')
             ->favicon(asset('images/favicon.ico'))
             ->login(UserLogin::class)
