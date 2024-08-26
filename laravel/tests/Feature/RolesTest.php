@@ -17,6 +17,14 @@ it('can render roles index page', function () {
         ->assertSuccessful();
 });
 
+it('unauthorized user cannot view roles', function () {
+    $user = createUser();
+
+    $this->actingAs($user)
+        ->get(RoleResource::getUrl('index'))
+        ->assertForbidden();
+});
+
 it('can view a role', function () {
     $role = Role::factory()->create();
 
@@ -24,17 +32,6 @@ it('can view a role', function () {
         'record' => $role,
     ]))
         ->assertSuccessful();
-});
-
-it('unauthorized user cannot view a role', function () {
-    $role = Role::factory()->create();
-    $user = createUser();
-
-    $this->actingAs($user)
-        ->get(RoleResource::getUrl('view', [
-            'record' => $role,
-        ]))
-        ->assertForbidden();
 });
 
 it('can create new role', function () {
