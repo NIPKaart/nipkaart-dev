@@ -60,11 +60,11 @@ class User extends Authenticatable implements FilamentUser
     public function canAccessPanel(Panel $panel): bool
     {
         if ($panel->getId() === 'admin') {
-            return $this->hasRole([UserRole::Admin, UserRole::Moderator]);
+            return $this->hasRole([UserRole::ADMIN, UserRole::MODERATOR]);
         }
 
         if ($panel->getId() === 'app') {
-            return $this->hasRole([UserRole::Admin, UserRole::Moderator, UserRole::User]);
+            return $this->hasRole([UserRole::ADMIN, UserRole::MODERATOR, UserRole::USER]);
         }
 
         // @codeCoverageIgnoreStart
