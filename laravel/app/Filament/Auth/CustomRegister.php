@@ -11,7 +11,7 @@ class CustomRegister extends Register
     protected function handleRegistration(array $data): Model
     {
         $user = $this->getUserModel()::create($data);
-        $user->assignRole(UserRole::User);
+        $user->assignRole(UserRole::USER);
 
         return $user;
     }
