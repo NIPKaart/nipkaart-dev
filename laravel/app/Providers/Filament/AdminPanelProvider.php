@@ -23,6 +23,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Blade;
+use Filament\Navigation\NavigationItem;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use ShuvroRoy\FilamentSpatieLaravelBackup\FilamentSpatieLaravelBackupPlugin;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
@@ -58,13 +59,13 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-o-arrows-right-left'),
                 'logout' => MenuItem::make()->label('Log Out'),
             ])
-            // ->navigationItems([
-            //     NavigationItem::make('Github')
-            //         ->url('https://github.com/nipkaart/core', shouldOpenInNewTab: true)
-            //         ->icon('heroicon-o-link')
-            //         ->group('Information')
-            //         ->sort(2),
-            // ])
+            ->navigationItems([
+                NavigationItem::make('Log Viewer')
+                    ->url(fn (): string => route('log-viewer.index'), shouldOpenInNewTab: true)
+                    ->icon('heroicon-o-document-text')
+                    ->group('Settings')
+                    ->sort(4),
+            ])
             ->databaseNotifications()
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')
