@@ -26,6 +26,15 @@ class UserResource extends Resource
 
     protected static ?string $navigationGroup = 'Settings';
 
+    /**
+     * Display number of records in the navigation.
+     * @return string
+     */
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
     public static function form(Form $form): Form
     {
         return $form
