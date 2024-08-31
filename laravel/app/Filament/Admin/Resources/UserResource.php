@@ -28,7 +28,6 @@ class UserResource extends Resource
 
     /**
      * Display number of records in the navigation.
-     * @return string
      */
     public static function getNavigationBadge(): ?string
     {
