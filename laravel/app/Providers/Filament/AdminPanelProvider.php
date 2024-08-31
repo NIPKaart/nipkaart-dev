@@ -9,8 +9,8 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Navigation\MenuItem;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages;
-// use Filament\Navigation\NavigationItem;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -58,13 +58,13 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-o-arrows-right-left'),
                 'logout' => MenuItem::make()->label('Log Out'),
             ])
-            // ->navigationItems([
-            //     NavigationItem::make('Github')
-            //         ->url('https://github.com/nipkaart/core', shouldOpenInNewTab: true)
-            //         ->icon('heroicon-o-link')
-            //         ->group('Information')
-            //         ->sort(2),
-            // ])
+            ->navigationItems([
+                NavigationItem::make('Log Viewer')
+                    ->url(fn (): string => route('log-viewer.index'), shouldOpenInNewTab: true)
+                    ->icon('heroicon-o-document-text')
+                    ->group('Settings')
+                    ->sort(4),
+            ])
             ->databaseNotifications()
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')
