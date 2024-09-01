@@ -52,10 +52,6 @@ class AdminPanelProvider extends PanelProvider
                 'profile' => MenuItem::make()
                     ->url(fn (): string => EditProfile::getUrl(panel: 'app'))
                     ->label('Edit Profile'),
-                'switch-app-dashboard' => MenuItem::make()
-                    ->label('User Dashboard')
-                    ->url(fn (): string => route('filament.app.pages.dashboard'))
-                    ->icon('heroicon-o-arrows-right-left'),
                 'logout' => MenuItem::make()->label('Log Out'),
             ])
             ->navigationItems([
@@ -101,9 +97,10 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])->renderHook(
-                PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
-                fn (): string => Blade::render('<x-filament::badge color="primary">ADMIN</x-filament::badge>'),
-            );
+            ]);
+        // ->renderHook(
+        //     PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
+        //     fn (): string => Blade::render('<x-filament::badge color="primary">ADMIN</x-filament::badge>'),
+        // );
     }
 }
