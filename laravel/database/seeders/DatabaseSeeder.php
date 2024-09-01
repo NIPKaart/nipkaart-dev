@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ShieldSeeder::class,
             CountrySeeder::class,
+            // ProvinceSeeder::class,
 
             UserSeeder::class,
         ]);
