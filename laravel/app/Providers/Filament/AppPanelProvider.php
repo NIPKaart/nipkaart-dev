@@ -21,7 +21,6 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
@@ -68,11 +67,6 @@ class AppPanelProvider extends PanelProvider
                 'profile' => MenuItem::make()
                     ->url(fn (): string => EditProfile::getUrl())
                     ->label('Edit Profile'),
-                'switch-admin-dashboard' => MenuItem::make()
-                    ->label('Admin Dashboard')
-                    ->url(fn (): string => route('filament.admin.pages.dashboard'))
-                    ->icon('heroicon-o-arrows-right-left')
-                    ->visible(fn () => Auth::user()->hasRole(['moderator', 'admin'])),
                 'logout' => MenuItem::make()->label('Log Out'),
             ])
             ->middleware([
@@ -88,9 +82,10 @@ class AppPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])->renderHook(
-                PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
-                fn (): string => Blade::render('<x-filament::badge color="primary">USER</x-filament::badge>'),
-            );
+            ]);
+        // ->renderHook(
+        //     PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
+        //     fn (): string => Blade::render('<x-filament::badge color="primary">USER</x-filament::badge>'),
+        // );
     }
 }
