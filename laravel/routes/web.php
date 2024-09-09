@@ -1,10 +1,7 @@
 <?php
 
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Frontend;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'root'])->name('root');
-
-// Route::get('/', function () {
-//     return view('pages.home');
-// });
+Route::get('/', [Frontend\HomeController::class, 'home'])->name('home');
+Route::get('/about', [Frontend\HomeController::class, 'about'])->name('about');
