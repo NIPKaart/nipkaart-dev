@@ -1,21 +1,42 @@
 <?php
 
 use App\Enums\UserRole;
+use App\Filament\Auth;
 use Filament\Facades\Filament;
 use Filament\Pages\Auth\Login;
 
 use function Pest\Livewire\livewire;
 
+covers(Auth\AdminLogin::class, Auth\UserLogin::class);
+
 beforeEach(function () {
     $this->user = createUser(UserRole::USER);
 });
 
-test('unauthenticated users are redirected to login page', function () {
-    $this->get('/admin')->assertRedirect('/admin/login');
+it('can render admin login page', function () {
+    $this->get(route('filament.admin.auth.login'))
+        ->assertSuccessful()
+        ->assertSee('Admin Login');
 });
 
-test('unauthenticated user cannot login admin panel', function () {
-    Filament::setCurrentPanel(Filament::getPanel('custom'));
+it('can render user login page', function () {
+    $this->get(route('filament.app.auth.login'))
+        ->assertSuccessful()
+        ->assertSee('User Login');
+});
+
+it('can render custom register page', function () {
+    $this->get(route('filament.app.auth.register'))
+        ->assertSuccessful()
+        ->assertSee('Register');
+});
+
+it('will redirect to admin login page if not authenticated', function () {
+    $this->get(route('filament.admin.pages.dashboard'))->assertRedirect(route('filament.admin.auth.login'));
+});
+
+it('cant login with invalid user role on admin login page', function () {
+    Filament::setCurrentPanel(Filament::getPanel('admin'));
 
     livewire(Login::class)
         ->fillForm([
