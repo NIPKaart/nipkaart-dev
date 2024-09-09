@@ -7,7 +7,7 @@ use Filament\Actions\DeleteAction;
 
 use function Pest\Livewire\livewire;
 
-covers(UserResource::class, UserResource\Pages\CreateUser::class, UserResource\Pages\EditUser::class, UserResource\Pages\ListUsers::class);
+covers(UserResource::class, UserResource\Pages\CreateUser::class, UserResource\Pages\EditUser::class, UserResource\Pages\ListUsers::class, App\Policies\UserPolicy::class);
 
 beforeEach(function () {
     $this->admin = createUser(UserRole::ADMIN);
