@@ -1,8 +1,8 @@
 <meta charset="utf-8" />
-<title>@yield('title') - NIPKaart</title>
+<title>{{ $title }} - NIPKaart</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="{{ __('Makes data insightful for everyone') }}" />
-<meta name='keywords' content="@yield('keywords') {{__('disabled parking')}} {{__('card')}} {{__('platform')}} nipkaart" />
+<meta name='keywords' content="{{$keywords}} {{__('disabled parking')}} {{__('card')}} {{__('platform')}} nipkaart" />
 <meta content="{{ config('app.name') }}" name="author" />
 
 <!-- Open Graph data -->
