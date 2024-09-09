@@ -50,7 +50,7 @@ it('can succesfull update user password', function () {
     $this->assertTrue(Hash::check($newPassword, $this->admin->password));
 });
 
-test('validates user profile update with invalid email', function () {
+it('validates user profile update with invalid email', function () {
     $newUser = User::factory()->make();
 
     livewire(EditProfile::class)
@@ -62,7 +62,7 @@ test('validates user profile update with invalid email', function () {
         ->assertHasFormErrors(['email'], 'editProfileForm');
 });
 
-test('validates password update with wrong current password and password confirmation', function () {
+it('validates password update with wrong current password and password confirmation', function () {
     // Arrange
     $newPassword = 'new-password';
 

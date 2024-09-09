@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Frontend\HomeController;
+
+covers(HomeController::class);
+
 it('can view the home page', function () {
     $this->get(route('home'))
         ->assertSuccessful();
