@@ -26,6 +26,8 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use ShuvroRoy\FilamentSpatieLaravelBackup\FilamentSpatieLaravelBackupPlugin;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
+use Jeffgreco13\FilamentBreezy\BreezyCore;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -68,12 +70,19 @@ class AdminPanelProvider extends PanelProvider
                 FilamentSpatieLaravelBackupPlugin::make()
                     ->usingPage(Backups::class)
                     ->usingPolingInterval('10s'),
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
+                FilamentShieldPlugin::make(),
                 FilamentBackgroundsPlugin::make()
                     ->imageProvider(
                         MyImages::make()
                             ->directory('images/backgrounds')
                     ),
+                BreezyCore::make()
+                    ->myProfile(
+                        shouldRegisterUserMenu: true,
+                        hasAvatars: true,
+                        slug: 'profile',
+                    )
+                    ->enableTwoFactorAuthentication(),
             ])
             ->discoverWidgets(in: app_path('Filament/Admin/Widgets'), for: 'App\\Filament\\Admin\\Widgets')
             ->widgets([

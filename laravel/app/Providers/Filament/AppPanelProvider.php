@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
+use Jeffgreco13\FilamentBreezy\BreezyCore;
 
 class AppPanelProvider extends PanelProvider
 {
@@ -55,6 +56,13 @@ class AppPanelProvider extends PanelProvider
                         MyImages::make()
                             ->directory('images/backgrounds')
                     ),
+                BreezyCore::make()
+                    ->myProfile(
+                        shouldRegisterUserMenu: true,
+                        hasAvatars: true,
+                        slug: 'profile',
+                    )
+                    ->enableTwoFactorAuthentication(),
             ])
             ->discoverWidgets(in: app_path('Filament/App/Widgets'), for: 'App\\Filament\\App\\Widgets')
             ->widgets([
