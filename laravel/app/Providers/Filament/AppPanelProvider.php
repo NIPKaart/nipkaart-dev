@@ -2,7 +2,6 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\App\Pages\EditProfile;
 use App\Filament\Auth\CustomRegister;
 use App\Filament\Auth\UserLogin;
 use Filament\Http\Middleware\Authenticate;
@@ -64,9 +63,6 @@ class AppPanelProvider extends PanelProvider
             // Navigation
             ->topNavigation()
             ->userMenuItems([
-                'profile' => MenuItem::make()
-                    ->url(fn (): string => EditProfile::getUrl())
-                    ->label('Edit Profile'),
                 'logout' => MenuItem::make()->label('Log Out'),
             ])
             ->middleware([

@@ -3,7 +3,6 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Admin\Pages\Backups;
-use App\Filament\App\Pages\EditProfile;
 use App\Filament\Auth\AdminLogin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -49,9 +48,6 @@ class AdminPanelProvider extends PanelProvider
             // Navigation
             ->sidebarCollapsibleOnDesktop()
             ->userMenuItems([
-                'profile' => MenuItem::make()
-                    ->url(fn (): string => EditProfile::getUrl(panel: 'app'))
-                    ->label('Edit Profile'),
                 'logout' => MenuItem::make()->label('Log Out'),
             ])
             ->navigationItems([
